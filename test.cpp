@@ -13,7 +13,7 @@ class UnionFind{
             siz.push_back(1);
         }
     }
-
+//ddddd
     int root(int x){
         while(true){
             if(par[x]==-1){
