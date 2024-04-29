@@ -1,0 +1,23 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(9, 50px); /* 9列 */
+    grid-template-rows: repeat(9, 50px); /* 9行 */
+    gap: 2px;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: #f0d9b5; /* 盤面の色 */
+    border: 1px solid #000; /* 枠線 */
+}
+
+/* 各マス目の色を交互に変更する */
+.row:nth-child(even) .cell:nth-child(odd),
+.row:nth-child(odd) .cell:nth-child(even) {
+    background-color: #b58863;
+}
