@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    z-index: 0;
 }
 
 .cell {
@@ -27,12 +28,3 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
-
-.king { background-image:url('king.png'); }
-.rook {background-image:url('rook.png'); }
-.bishop { background-image:url('bishop.png');}
-.gold {background-image:url('gold.png');  }
-.silver {background-image:url('silver.png');  }
-.knight { background-image:url('knight.png'); }
-.lance { background-image:url('lance.png'); }
-.pawn { background-image:url('pawn.png'); }

@@ -6,14 +6,14 @@ window.onload = function() {
 
     // 初期配置の駒
     const initialPosition = [
-        ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L'],
-        [' ', 'R', ' ', ' ', ' ', ' ', ' ', 'B', ' '],
+        ['l', 'n', 's', 'g', 'k', 'g', 's', 'n', 'l'],
+        ['_', 'r', '_', '_', '_', '_', '_', 'b', '_'],
         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
+        ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
+        ['_', '_', '_', '_', '_', '_', '_', '_', '_'],
         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-        [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
+        ['_', 'B', '_', '_', '_', '_', '_', 'R', '_'],
         ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L']
     ];
 
@@ -24,7 +24,7 @@ window.onload = function() {
         'B': 'bishop',
         'G': 'gold',
         'S': 'silver',
-        'K': 'knight',
+        'N': 'knight',
         'L': 'lance',
         'P': 'pawn'
     };
@@ -33,7 +33,7 @@ window.onload = function() {
     for (let row = 0; row < boardSize; row++) {
         for (let col = 0; col < boardSize; col++) {
             const piece = initialPosition[row][col];
-            if (piece !== '_') {
+            if (piece !== ' ') {
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
                 if ((row + col) % 2 === 0) {
@@ -43,8 +43,7 @@ window.onload = function() {
                 }
                 const pieceElement = document.createElement('div');
                 pieceElement.classList.add('piece', pieceClasses[piece]);
-                pieceElement.classList.add('piece');
-                pieceElement.style.backgroundImage='url(`${piece}.png`)';
+                pieceElement.textContent = piece;
                 cell.appendChild(pieceElement);
                 board.appendChild(cell);
             }
