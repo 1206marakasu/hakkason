@@ -1,4 +1,4 @@
-import komaStatus from './komaStatus.js';
+//import komaStatus from './komaStatus.js';
 window.onload = function() {
     const board = document.getElementById('board');
     // 将棋盤のサイズを定義
@@ -50,6 +50,11 @@ window.onload = function() {
                     // クリックされたセルの情報を利用して処理を行う
                     // 例: movePiece(clickedRow, clickedCol);
                 });
+                const pieceElement = document.createElement('div');
+                pieceElement.classList.add('piece', pieceClasses[piece]);
+                pieceElement.textContent = piece;
+                cell.appendChild(pieceElement);
+                board.appendChild(cell);
             }
         }
     }
