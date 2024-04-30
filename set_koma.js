@@ -1,6 +1,6 @@
+import komaStatus from './komaStatus.js';
 window.onload = function() {
     const board = document.getElementById('board');
-    
     // 将棋盤のサイズを定義
     const boardSize = 9;
 
@@ -41,11 +41,15 @@ window.onload = function() {
                 } else {
                     cell.classList.add('black');
                 }
-                const pieceElement = document.createElement('div');
-                pieceElement.classList.add('piece', pieceClasses[piece]);
-                pieceElement.textContent = piece;
-                cell.appendChild(pieceElement);
-                board.appendChild(cell);
+                cell.addEventListener('click', () => {
+                    // クリックされたセルの行(row)と列(col)を取得
+                    const clickedRow = row;
+                    const clickedCol = col;
+                    console.log(`Clicked cell at row ${clickedRow}, col ${clickedCol}`);
+                    console.log(initialPosition[`${clickedRow}`][`${clickedCol}`]);
+                    // クリックされたセルの情報を利用して処理を行う
+                    // 例: movePiece(clickedRow, clickedCol);
+                });
             }
         }
     }
