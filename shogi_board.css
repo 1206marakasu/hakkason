@@ -22,12 +22,10 @@
     background-color: #eeeed2;
 }
 .piece {
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .king { background-image:url('king.png'); }
