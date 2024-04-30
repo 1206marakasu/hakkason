@@ -1,4 +1,3 @@
-//import komaStatus from './komaStatus.js';
 window.onload = function() {
     const board = document.getElementById('board');
     
@@ -18,16 +17,24 @@ window.onload = function() {
         ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L']
     ];
 
-    // 駒の表示名とCSSクラスのマッピング
-    const pieceClasses = {
-        'K': 'king.png',
-        'R': 'rook.png',
-        'B': 'bishop.png',
-        'G': 'gold.png',
-        'S': 'silver.png',
-        'N': 'knight.png',
-        'L': 'lance.png',
-        'P': 'pawn.png'
+    // 駒の値に対応する画像パス
+    const pieceImages = {
+        'k': 'king.png',
+        'r': 'rook.png',
+        'b': 'bishop.png',
+        'g': 'gold.png',
+        's': 'silver.png',
+        'n': 'knight.png',
+        'l': 'lance.png',
+        'p': 'pawn.png',
+        'K': 'king_promoted.png',
+        'R': 'rook_promoted.png',
+        'B': 'bishop_promoted.png',
+        'G': 'gold_promoted.png',
+        'S': 'silver_promoted.png',
+        'N': 'knight_promoted.png',
+        'L': 'lance_promoted.png',
+        'P': 'pawn_promoted.png',
     };
 
     // 特定の座標で指定されたセルに画像を配置する関数
@@ -68,19 +75,9 @@ window.onload = function() {
                 } else {
                     cell.classList.add('black');
                 }
-                cell.addEventListener('click', () => {
-                    // クリックされたセルの行(row)と列(col)を取得
-                    const clickedRow = row;
-                    const clickedCol = col;
-                    console.log(`Clicked cell at row ${clickedRow}, col ${clickedCol}`);
-                    console.log(initialPosition[`${clickedRow}`][`${clickedCol}`]);
-                    // クリックされたセルの情報を利用して処理を行う
-                    // 例: movePiece(clickedRow, clickedCol);
-                });
-                const pieceElement = document.createElement('div');
-                pieceElement.classList.add('piece', pieceClasses[piece]);
-                pieceElement.textContent = piece;
-                cell.appendChild(pieceElement);
+                // セルの座標を設定
+                cell.dataset.row = row;
+                cell.dataset.col = col;
                 board.appendChild(cell);
 
                 // 特定の座標に画像を配置

@@ -5,14 +5,9 @@
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
-    z-index: 0;
 }
 
 .cell {
-    width: calc(100% / 9);   /* セルの幅を計算 */
-    height: calc(100% / 9);
-    width: 75px;  /* セルの幅 */
-    height: 75px; /* セルの高さ */
     border: 1px solid black;
     display: flex;
     align-items: center;
@@ -32,3 +27,5 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+
