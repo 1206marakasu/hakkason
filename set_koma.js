@@ -19,14 +19,14 @@ window.onload = function() {
 
     // 駒の表示名とCSSクラスのマッピング
     const pieceClasses = {
-        '王将': 'king',
-        '飛車': 'rook',
-        '角行': 'bishop',
-        '金将': 'gold',
-        '銀将': 'silver',
-        '桂馬': 'knight',
-        '香車': 'lance',
-        '歩兵': 'pawn'
+        'K': 'king',
+        'R': 'rook',
+        'B': 'bishop',
+        'G': 'gold',
+        'S': 'silver',
+        'K': 'knight',
+        'L': 'lance',
+        'P': 'pawn'
     };
 
     // 初期配置の駒を将棋盤に配置
