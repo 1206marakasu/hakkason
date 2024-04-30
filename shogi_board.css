@@ -30,11 +30,11 @@
     justify-content: center;
 }
 
-.king { color: #ff0000; }
-.rook { color: #0000ff; }
-.bishop { color: #008000; }
-.gold { color: #ffd700; }
-.silver { color: #c0c0c0; }
-.knight { color: #800080; }
-.lance { color: #ff4500; }
-.pawn { color: #000000; }
+.king { background-image:url('king.png'); }
+.rook {background-image:url('rook.png'); }
+.bishop { background-image:url('bishop.png');}
+.gold {background-image:url('gold.png');  }
+.silver {background-image:url('silver.png');  }
+.knight { background-image:url('knight.png'); }
+.lance { background-image:url('lance.png'); }
+.pawn { background-image:url('pawn.png'); }

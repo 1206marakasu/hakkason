@@ -43,7 +43,8 @@ window.onload = function() {
                 }
                 const pieceElement = document.createElement('div');
                 pieceElement.classList.add('piece', pieceClasses[piece]);
-                pieceElement.textContent = piece;
+                pieceElement.classList.add('piece');
+                pueceElement.style.backgroundImage='url('${piece}.png')';
                 cell.appendChild(pieceElement);
                 board.appendChild(cell);
             }
