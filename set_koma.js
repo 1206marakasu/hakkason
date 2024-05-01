@@ -8,7 +8,7 @@ window.onload = function() {
         [' ', 'r', ' ', ' ', ' ', ' ', ' ', 'b', ' '],
         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
         [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
@@ -76,19 +76,29 @@ window.onload = function() {
                 // 角行の場合、斜めに動ける
                 return Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol);
             case 'G': // 金将
+                return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1 &&
+                !(toRow - fromRow === 1 && toCol !== fromCol);
+            case 'g': // 金将
+                return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1 &&
+                !(toRow - fromRow === -1 && toCol !== fromCol);
             case 'S': // 銀将
-            case 'g':
+                return Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol) == 1 ||
+                 (fromRow-toRow) == 1 && fromCol === toCol;
             case 's':
-                return true;
+                return Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol) == 1 ||
+                 (fromRow-toRow) == -1 && fromCol === toCol;
             case 'N': // 桂馬
+                return (fromRow-toRow) == 2 && Math.abs(fromCol-toCol) == 1 ;
             case 'n':
-                return Math.abs(fromRow-toRow) ==2 && Math.abs(fromCol-toCol) == 1 ;
+                return (fromRow-toRow) == -2 && Math.abs(fromCol-toCol) == 1 ;
             case 'L': // 香車
+                return fromCol === toCol && fromRow > toRow;
             case 'l':
-                return fromCol === toCol;
+                return fromCol === toCol && fromRow < toRow;
             case 'P':
+                return (fromRow-toRow) == 1 && fromCol === toCol;
             case 'p':
-                return Math.abs(fromRow-toRow)==1 && fromCol === toCol;
+                return (fromRow-toRow)== -1 && fromCol === toCol;
             default:
                 return false; // その他の駒は無効な移動
         }
