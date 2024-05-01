@@ -24,14 +24,14 @@ window.onload = function() {
         'N': 'knight.png',
         'L': 'lance.png',
         'P': 'pawn.png',
-        'k':'',
-        'r':'',
-        'b':'',
-        'g':'',
-        's':'',
-        'n':'',
-        'l':'',
-        'p':'',
+        'k':'rking.png',
+        'r':'rrook.png',
+        'b':'rbishop.png',
+        'g':'rgold.png',
+        's':'rsilver.png',
+        'n':'rknight.png',
+        'l':'rlance.png',
+        'p':'rpawn.png',
         ' ': 'space.png',
     };
     //initialPotisionの要素を1P 2Pで振り分ける
@@ -60,6 +60,40 @@ window.onload = function() {
     let clickCol2 = -1;
     let clickCount = 0;
 
+    function isValidMove(piece, fromRow, fromCol, toRow, toCol) {
+        // クリックされた駒の種類に応じて、移動先のマスが妥当かどうかを判定する
+        switch (piece) {
+            case 'K': // 王
+            case 'k':
+                // 王の場合、1マスだけ移動可能
+                return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1;
+            case 'R': // 飛車
+            case 'r':
+                // 飛車の場合、直線上に動ける
+                return fromRow === toRow || fromCol === toCol;
+            case 'B': // 角行
+            case 'b':
+                // 角行の場合、斜めに動ける
+                return Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol);
+            case 'G': // 金将
+            case 'S': // 銀将
+            case 'g':
+            case 's':
+                return true;
+            case 'N': // 桂馬
+            case 'n':
+                return Math.abs(fromRow-toRow) ==2 && Math.abs(fromCol-toCol) == 1 ;
+            case 'L': // 香車
+            case 'l':
+                return fromCol === toCol;
+            case 'P':
+            case 'p':
+                return Math.abs(fromRow-toRow) && fromCol === toCol;
+            default:
+                return false; // その他の駒は無効な移動
+        }
+    }
+    
     function addImageToCellAtPosition(row, col, piece) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
@@ -75,6 +109,11 @@ window.onload = function() {
             } else if (clickCount === 1) {
                 clickRow2 = row;
                 clickCol2 = col;
+                if (!isValidMove(initialPosition[clickRow1][clickCol1], clickRow1, clickCol1, clickRow2, clickCol2)) {
+                    alert("そこには動かせません！");
+                    clickCount = 0; // クリック数をリセット
+                    return; // 無効な移動なら何もせずに処理を終了
+                }
             }
             clickCount = (clickCount + 1) % 2;
             //initialPositionのタイプが一致したらポップアップ表示
@@ -101,6 +140,13 @@ window.onload = function() {
         cell.appendChild(img);
 
         board.appendChild(cell);
+    }
+
+    for (let row = 0; row < boardSize; row++) {
+        for (let col = 0; col < boardSize; col++) {
+            const piece = initialPosition[row][col];
+            //addImageToCellAtPosition(row, col, piece);
+        }
     }
     function updateBoard() {
         // 盤面の全セルをクリアして再描画
