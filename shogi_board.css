@@ -6,8 +6,8 @@
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
     position: fixed;
-    top: 100px;
-    left: 100px;
+    top: 200px;
+    left: 300px;
 }
 
 .cell {
