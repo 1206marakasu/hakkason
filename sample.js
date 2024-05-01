@@ -1,4 +1,4 @@
-import komaStatus from './komaStatus.js';
+//import komaStatus from './komaStatus.js';
 
 window.onload = function() {
     const board = document.getElementById('board');
