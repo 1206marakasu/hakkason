@@ -45,7 +45,7 @@ window.onload = function() {
         if (cell) {
             // セルが見つかった場合は画像を配置する
             const img = document.createElement('img');
-            img.src = `${pieceImages[piece]}`;
+            img.src = `/koma/${pieceImages[piece]}`;
             img.alt = '駒';
             
             // 画像をセルのサイズに合わせて縮小する
