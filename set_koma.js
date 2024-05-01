@@ -1,5 +1,3 @@
-//import komaStatus from './komaStatus.js';
-
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
@@ -8,7 +6,7 @@ window.onload = function() {
         [' ', 'r', ' ', ' ', ' ', ' ', ' ', 'b', ' '],
         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', 'S', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
         [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
@@ -53,6 +51,32 @@ window.onload = function() {
         'l': 'B',
         'p': 'B',
     }
+    //2Pと1Pの手持ちの駒の数
+    let holdpiece2p ={
+        'K': 0,
+        'R': 0,
+        'B': 0,
+        'G': 0,
+        'S': 0,
+        'N': 0,
+        'L': 0,
+        'P': 0,
+    }
+
+    let holdpiece1p ={
+        'k': 0,
+        'r': 0,
+        'b': 0,
+        'g': 0,
+        's': 0,
+        'n': 0,
+        'l': 0,
+        'p': 0,
+    }
+    let  dynamicTextElement = document.getElementById('dynamicText');
+    let  dynamicTextElement2 = document.getElementById('dynamicText2');
+    dynamicTextElement.innerText='1P 0 0 0 0 0 0 0 0';
+    dynamicTextElement2.innerText='2P 0 0 0 0 0 0 0 0';
     //クリックされたセルの行と列　回数
     let clickRow1 = -1;
     let clickCol1 = -1;
@@ -130,17 +154,29 @@ window.onload = function() {
             if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1]]}`===`${pieceType[initialPosition[clickRow2][clickCol2]]}`){
                 alert("そこには動かせません！");
                 clickCount=0;
-            }//入力１と２でinitialPositionの要素を入れ替え
+            //initialPositionのタイプがA,BまたはB,Aとなる場合は駒を取る
+            }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2]]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2]]}`==='A')))){
+                if(`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='A'){
+                    //1pが駒を取った時trueを送る
+                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true);
+                }else{
+                    //2pの場合はfalse
+                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false);
+                }
+                
+                initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
+                initialPosition[clickRow1][clickCol1]=' ';
+            }
+            //入力１と２でinitialPositionの要素を入れ替え
             else if(clickCount===0){
                 console.log(`First click: row ${clickRow1}, col ${clickCol1}`);
                 console.log(`Second click: row ${clickRow2}, col ${clickCol2}`);
                 const copy=initialPosition[clickRow1][clickCol1];
                 initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
                 initialPosition[clickRow2][clickCol2]=copy;
-                //現在の盤面の状態をinisialPotisionに合わせる
-                updateBoard();
-
-            }
+            } 
+            //現在の盤面の状態をinisialPotisionに合わせる
+            updateBoard();
         });
         //セルに写真を張り付ける
         const img = document.createElement('img');
@@ -175,5 +211,14 @@ window.onload = function() {
             const piece = initialPosition[row][col];
             addImageToCellAtPosition(row, col, piece);
         }
+    }
+    function catchkoma(row1,col1,row2,col2,flag){
+        if(flag){
+            holdpiece1p[`${initialPosition[row2][col2]}`]++;
+        }else{
+            holdpiece2p[`${initialPosition[row2][col2]}`]++;
+        }
+        dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
+        dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     }
 };
