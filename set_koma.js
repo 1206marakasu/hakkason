@@ -176,6 +176,10 @@ window.onload = function() {
                 initialPosition[clickRow2][clickCol2]=copy;
             } 
             //現在の盤面の状態をinisialPotisionに合わせる
+            if(clickCount==0){
+                //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
+                nari(initialPosition[clickRow2][clickCol2],clickRow2,clickCol2);
+            }
             updateBoard();
         });
         //セルに写真を張り付ける
@@ -220,5 +224,18 @@ window.onload = function() {
         }
         dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
         dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
+    }
+    //駒が駒が成るときの処理
+    function nari(koma,row,col){
+        if(pieceType[koma]==='A'){
+            if(row < 3){
+                alert("成りますか？");
+            }
+        }
+        else{
+            if(row > 5){
+                alert("成りますか？");
+        }
+    }
     }
 };
