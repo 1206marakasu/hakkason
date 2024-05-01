@@ -188,12 +188,12 @@ window.onload = function() {
         board.appendChild(cell);
     }
 
-    for (let row = 0; row < boardSize; row++) {
+    /*for (let row = 0; row < boardSize; row++) {
         for (let col = 0; col < boardSize; col++) {
             const piece = initialPosition[row][col];
             //addImageToCellAtPosition(row, col, piece);
         }
-    }
+    }*/
     function updateBoard() {
         // 盤面の全セルをクリアして再描画
         board.innerHTML = '';
