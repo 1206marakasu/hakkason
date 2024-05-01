@@ -4,9 +4,9 @@ window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
     let initialPosition = [
-        ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L'],
-        [' ', 'R', ' ', ' ', ' ', ' ', ' ', 'B', ' '],
-        ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+        ['l', 'n', 's', 'g', 'k', 'g', 's', 'n', 'l'],
+        [' ', 'r', ' ', ' ', ' ', ' ', ' ', 'b', ' '],
+        ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -24,8 +24,34 @@ window.onload = function() {
         'N': 'knight.png',
         'L': 'lance.png',
         'P': 'pawn.png',
+        'k':'',
+        'r':'',
+        'b':'',
+        'g':'',
+        's':'',
+        'n':'',
+        'l':'',
+        'p':'',
         ' ': 'space.png',
     };
+    let pieceType = {
+        'K': 'A',
+        'R': 'A',
+        'B': 'A',
+        'G': 'A',
+        'S': 'A',
+        'N': 'A',
+        'L': 'A',
+        'P': 'A',
+        'k': 'B',
+        'r': 'B',
+        'b': 'B',
+        'g': 'B',
+        's': 'B',
+        'n': 'B',
+        'l': 'B',
+        'p': 'B',
+    }
 
     let clickRow1 = -1;
     let clickCol1 = -1;
@@ -48,10 +74,12 @@ window.onload = function() {
             } else if (clickCount === 1) {
                 clickRow2 = row;
                 clickCol2 = col;
+            }clickCount = (clickCount + 1) % 2;
+            if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1]]}`===`${pieceType[initialPosition[clickRow2][clickCol2]]}`){
+                alert("そこには動かせません！");
+                clickCount=0;
             }
-            
-            clickCount = (clickCount + 1) % 2;
-            if(clickCount===0){
+            else if(clickCount===0){
                 console.log(`First click: row ${clickRow1}, col ${clickCol1}`);
                 console.log(`Second click: row ${clickRow2}, col ${clickCol2}`);
                 const copy=initialPosition[clickRow1][clickCol1];
