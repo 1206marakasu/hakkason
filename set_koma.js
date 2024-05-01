@@ -1,11 +1,9 @@
-import komaStatus from './komaStatus.js';
+//import komaStatus from './komaStatus.js';
+
 window.onload = function() {
-    
     const board = document.getElementById('board');
-    // 将棋盤のサイズを定義
     const boardSize = 9;
-    // 初期配置の駒
-    const initialPosition = [
+    let initialPosition = [
         ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L'],
         [' ', 'R', ' ', ' ', ' ', ' ', ' ', 'B', ' '],
         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
@@ -16,7 +14,7 @@ window.onload = function() {
         [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
         ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L']
     ];
-    // 駒の表示名とCSSクラスのマッピング
+
     const pieceImages = {
         'K': 'king.png',
         'R': 'rook.png',
@@ -29,50 +27,73 @@ window.onload = function() {
         ' ': 'space.png',
     };
 
+    let clickRow1 = -1;
+    let clickCol1 = -1;
+    let clickRow2 = -1;
+    let clickCol2 = -1;
+    let clickCount = 0;
+
     function addImageToCellAtPosition(row, col, piece) {
-        // 座標で指定されたセルを特定する
-        const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.classList.add('white');
+        cell.dataset.row = row;
+        cell.dataset.col = col;
 
-        if (cell) {
-            // セルが見つかった場合は画像を配置する
-            const img = document.createElement('img');
-            img.src = `${pieceImages[piece]}`;
-            //img.alt = '駒';
-            
-            // 画像をセルのサイズに合わせて縮小する
-            img.style.maxWidth = "100%";
-            img.style.maxHeight = "100%";
-
-            // 既にセルに何かしらの要素がある場合は削除してから画像を追加する
-            while (cell.firstChild) {
-                cell.removeChild(cell.firstChild);
+        cell.addEventListener('click', () => {
+            if (clickCount === 0) {
+                clickRow1 = row;
+                clickCol1 = col;
+                
+            } else if (clickCount === 1) {
+                clickRow2 = row;
+                clickCol2 = col;
             }
+            
+            clickCount = (clickCount + 1) % 2;
+            if(clickCount===0){
+                console.log(`First click: row ${clickRow1}, col ${clickCol1}`);
+                console.log(`Second click: row ${clickRow2}, col ${clickCol2}`);
+                const copy=initialPosition[clickRow1][clickCol1];
+                initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
+                initialPosition[clickRow2][clickCol2]=copy;
+                //現在の盤面の状態をinisialPotisionに合わせる
+                updateBoard();
 
-            cell.appendChild(img);
-        } else {
-            console.error('指定された座標のセルが見つかりません。');
+            }
+        });
+
+        const img = document.createElement('img');
+        img.src = `${pieceImages[piece]}`;
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+        cell.appendChild(img);
+
+        board.appendChild(cell);
+    }
+
+    for (let row = 0; row < boardSize; row++) {
+        for (let col = 0; col < boardSize; col++) {
+            const piece = initialPosition[row][col];
+            //addImageToCellAtPosition(row, col, piece);
         }
     }
+    function updateBoard() {
+        // 盤面の全セルをクリアして再描画
+        board.innerHTML = '';
+        for (let row = 0; row < boardSize; row++) {
+            for (let col = 0; col < boardSize; col++) {
+                const piece = initialPosition[row][col];
+                addImageToCellAtPosition(row, col, piece);
+            }
+        }
+    }
+
     // 初期配置の駒を将棋盤に配置
     for (let row = 0; row < boardSize; row++) {
         for (let col = 0; col < boardSize; col++) {
             const piece = initialPosition[row][col];
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            cell.classList.add('white');
-            let clickRow=0,clickCol=0;
-            cell.addEventListener('click', () => {                    
-                // クリックされたセルの行(row)と列(col)を取得
-                clickRow = row;
-                clickCol = col;               
-            });
-             // セルの座標を設定
-             cell.dataset.row = row;
-             cell.dataset.col = col;
-             board.appendChild(cell);
-
-            board.appendChild(cell);
             addImageToCellAtPosition(row, col, piece);
         }
     }
-}
+};
