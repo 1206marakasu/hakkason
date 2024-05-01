@@ -8,9 +8,30 @@
     <script src="set_koma.js" defer></script>
 </head>
 <body>
+    <div class="container" style="position: relative;">
     <p id="dynamicText"></p>
     <p id="dynamicText2"></p>
     <div id="board"></div>
+    <div id="piece-area" class="piece-area">
+            <img src="rook.png" class="kpiece" data-piece="rook">
+            <img src="bishop.png" class="kpiece" data-piece="bishop">
+            <img src="gold.png" class="kpiece" data-piece="gold">
+            <img src="silver.png" class="kpiece" data-piece="silver">
+            <img src="knight.png" class="kpiece" data-piece="knight">
+            <img src="rook.png" class="kpiece" data-piece="rook">
+        <div class="kpiece" data-piece="lance">香</div>
+        <div class="kpiece" data-piece="pawn">歩</div>
+    </div>
+    <div id="piece-area2" class="piece-area2">
+        <div class="kpiece" data-piece="pawn">歩</div>
+        <div class="kpiece" data-piece="lance">香</div>
+        <div class="kpiece" data-piece="knight">桂</div>
+        <div class="kpiece" data-piece="silver">銀</div>
+        <div class="kpiece" data-piece="gold">金</div>
+        <div class="kpiece" data-piece="bishop">角</div>
+        <div class="kpiece" data-piece="rook">飛</div>
+    </div>
+    <div>
     <script src="set_koma.js" type="module" defer></script>
 </body>
 </html>

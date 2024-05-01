@@ -28,3 +28,32 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.kpiece {
+    /* 各駒のスタイル */
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.piece-area {
+    width: 70px; /* 適切な幅を設定してください */
+    height: 400px; /* 適切な高さを設定してください */
+    border: 1px solid #000;
+    background-color: #be7515;
+    position:fixed;
+    top: 200px; /* 将棋盤からの相対的な位置 */
+    left: 200px
+}
+
+.piece-area2 {
+    width: 70px; /* 適切な幅を設定してください */
+    height: 400px; /* 適切な高さを設定してください */
+    border: 1px solid #000;
+    background-color: #be7515;
+    position: fixed;
+    top: 325px;
+    left: 720px;
+}
