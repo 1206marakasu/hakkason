@@ -1,5 +1,6 @@
-//import komaStatus from './komaStatus.js';
+import komaStatus from './komaStatus.js';
 window.onload = function() {
+    
     const board = document.getElementById('board');
     // 将棋盤のサイズを定義
     const boardSize = 9;
@@ -15,7 +16,6 @@ window.onload = function() {
         [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
         ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L']
     ];
-
     // 駒の表示名とCSSクラスのマッピング
     const pieceImages = {
         'K': 'king.png',
@@ -60,14 +60,11 @@ window.onload = function() {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.classList.add('white');
+            let clickRow=0,clickCol=0;
             cell.addEventListener('click', () => {                    
                 // クリックされたセルの行(row)と列(col)を取得
-                const clickedRow = row;
-                const clickedCol = col;
-                console.log(`Clicked cell at row ${clickedRow}, col ${clickedCol}`);
-                console.log(initialPosition[`${clickedRow}`][`${clickedCol}`]);
-                // クリックされたセルの情報を利用して処理を行う
-                // 例: movePiece(clickedRow, clickedCol);
+                clickRow = row;
+                clickCol = col;               
             });
              // セルの座標を設定
              cell.dataset.row = row;

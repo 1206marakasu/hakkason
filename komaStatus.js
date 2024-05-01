@@ -2,8 +2,7 @@
 
 // Komaクラスの定義
 class Koma {
-    constructor(name, row = -1, col = -1, promoted = false) {
-        this.name = name;
+    constructor(row = -1, col = -1, promoted = false) {
         this.row = row;
         this.col = col;
         this.promoted = promoted;
@@ -11,7 +10,7 @@ class Koma {
 
     // インスタンスの状態を表示するメソッド
     displayStatus() {
-        console.log(`${this.name}: row=${this.row}, col=${this.col}, promoted=${this.promoted}`);
+        console.log(`row=${this.row}, col=${this.col}, promoted=${this.promoted}`);
     }
 }
 
@@ -20,7 +19,7 @@ class Bishop extends Koma {}
 class Gold extends Koma {}
 class King extends Koma {
     constructor(row = -1, col = -1, inCheck = false) {
-        super('King', row, col);
+        super(row, col);
         this.inCheck = inCheck;
     }
 }
