@@ -88,7 +88,7 @@ window.onload = function() {
                 return fromCol === toCol;
             case 'P':
             case 'p':
-                return Math.abs(fromRow-toRow) && fromCol === toCol;
+                return Math.abs(fromRow-toRow)==1 && fromCol === toCol;
             default:
                 return false; // その他の駒は無効な移動
         }
