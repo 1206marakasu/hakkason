@@ -1,13 +1,10 @@
 #board {
-    width: 400px;
-    height: 400px;
+    width: 80%;
+    max-width: 400px;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
-    position: fixed;
-    top: 200px;
-    left: 300px;
 }
 
 .cell {
@@ -15,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 1;
 }
 
 
@@ -43,9 +41,7 @@
     height: 400px; /* 適切な高さを設定してください */
     border: 1px solid #000;
     background-color: #be7515;
-    position:fixed;
-    top: 200px; /* 将棋盤からの相対的な位置 */
-    left: 200px
+    top: px;
 }
 
 .piece-area2 {
@@ -53,7 +49,13 @@
     height: 400px; /* 適切な高さを設定してください */
     border: 1px solid #000;
     background-color: #be7515;
-    position: fixed;
-    top: 325px;
-    left: 720px;
+}
+
+#game {
+    width: 100%;
+    display: flex;
+    align-items: end;
+}
+.top {
+    align-items: start;
 }
