@@ -84,6 +84,7 @@ window.onload = function() {
     let clickCol2 = -1;
     let clickCount = 0;
 
+
     function isValidMove(piece, fromRow, fromCol, toRow, toCol) {
         // クリックされた駒の種類に応じて、移動先のマスが妥当かどうかを判定する
         switch (piece) {
