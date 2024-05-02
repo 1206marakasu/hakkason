@@ -320,6 +320,7 @@ window.onload = function() {
                 alert("成りますか？");
                 koma.promoted=true;
                 koma.name='N'+koma.name;
+                alert("成りますね？");
             }
         }
         else if (!koma.promoted){
@@ -327,6 +328,7 @@ window.onload = function() {
                 alert("成りますか？");
                 koma.promoted=true;
                 koma.name='N'+koma.name;
+                alert("成りますね？");
         }
     }
     }
