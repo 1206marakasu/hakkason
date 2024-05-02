@@ -328,9 +328,18 @@ window.onload = function() {
     }
     function catchkoma(row1,col1,row2,col2,flag){
         if(flag){
-            holdpiece1p[`${initialPosition[row2][col2].name}`]++;
+            if(`${initialPosition[row2][col2].name}`[0]==='N'){
+                holdpiece1p[`${initialPosition[row2][col2].name}`[1]]++;
+            }else{
+                holdpiece1p[`${initialPosition[row2][col2].name}`]++;
+            }
+            
         }else{
-            holdpiece2p[`${initialPosition[row2][col2].name}`]++;
+            if(`${initialPosition[row2][col2].name}`[0]==='N'){
+                holdpiece2p[`${initialPosition[row2][col2].name}`[1]]++;
+            }else{
+                holdpiece2p[`${initialPosition[row2][col2].name}`]++;
+            }
         }
         dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
         dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
@@ -340,16 +349,21 @@ window.onload = function() {
         if ((pieceType[koma.name] === 'A' && !koma.promoted)) {
             if(!(koma.name === 'G' || koma.name === 'K')){
                 if (row < 3) {
-                    alert("成りますね？");
-                    koma.promoted = true;
-                    koma.name = 'N' + koma.name;
+                    let result = confirm("成りますか？");
+                    if(result){
+                        koma.promoted = true;
+                        koma.name = 'N' + koma.name;
+                    }
+                    
                 }
             }
         } else if (!koma.promoted && !(koma.name === 'g' || koma.name === 'k')) {
             if (row > 5) {
-                alert("成りますね？");
-                koma.promoted = true;
-                koma.name = 'N' + koma.name;
+                let result = confirm("成りますか？");
+                    if(result){
+                        koma.promoted = true;
+                        koma.name = 'N' + koma.name;
+                    }
             }
         }
     }
