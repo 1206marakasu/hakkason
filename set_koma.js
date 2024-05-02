@@ -31,6 +31,18 @@ window.onload = function() {
         'l':'rlance.png',
         'p':'rpawn.png',
         ' ': 'space.png',
+        'NS': 'Nsilver.png',
+        'NN': 'Nknight.png',
+        'NL': 'Nlance.png',
+        'NR': 'Nrook.png',
+        'NB': 'Nbishop.png',
+        'NP': 'Npawn.png',
+        'Ns': 'rNsilver.png',
+        'Nn': 'rNknight.png',
+        'Nl': 'rNlance.png',
+        'Nr': 'rNrook.png',
+        'Nb': 'rNbishop.png',
+        'Np': 'rNpawn.png',
     };
     //initialPotisionの要素を1P 2Pで振り分ける
     let pieceType = {
@@ -42,6 +54,12 @@ window.onload = function() {
         'N': 'A',
         'L': 'A',
         'P': 'A',
+        'NR': 'A',
+        'NB': 'A',
+        'NP': 'A',
+        'NS': 'A',
+        'NN': 'A',
+        'NL': 'A',
         'k': 'B',
         'r': 'B',
         'b': 'B',
@@ -50,6 +68,12 @@ window.onload = function() {
         'n': 'B',
         'l': 'B',
         'p': 'B',
+        'Nr': 'B',
+        'Nb': 'B',
+        'Np': 'B',
+        'Ns': 'B',
+        'Nn': 'B',
+        'Nl': 'B',
     }
     //2Pと1Pの手持ちの駒の数
     let holdpiece2p ={
@@ -229,12 +253,12 @@ window.onload = function() {
     function nari(koma,row,col){
         if(pieceType[koma]==='A'){
             if(row < 3){
-                alert("成りますか？");
+                alert("成りますね？");
             }
         }
         else{
             if(row > 5){
-                alert("成りますか？");
+                alert("成りますね？");
         }
     }
     }
