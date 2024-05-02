@@ -199,7 +199,7 @@ window.onload = function() {
             } else if (clickCount === 1) {
                 clickRow2 = row;
                 clickCol2 = col;
-                if (!isValidMove(initialPosition[clickRow1][clickCol1], clickRow1, clickCol1, clickRow2, clickCol2)) {
+                if (!isValidMove(initialPosition,initialPosition[clickRow1][clickCol1], clickRow1, clickCol1, clickRow2, clickCol2)) {
                     alert("そこには動かせません！");
                     clickCount = 0; // クリック数をリセット
                     return; // 無効な移動なら何もせずに処理を終了
