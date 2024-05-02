@@ -288,21 +288,32 @@ window.onload = function() {
         if ((pieceType[koma.name] === 'A' && !koma.promoted)) {
             if(!(koma.name === 'G' || koma.name === 'K')){
                 if (row2 < 3 || row1 < 3) {
-                    let result = confirm("成りますか？");
-                    if(result){
-                        koma.promoted = true;
-                        koma.name = 'N' + koma.name;
+                    if(row2  === 0 && (koma.name === 'P' || koma.name === 'L' || koma.name === 'N')){
+                                koma.promoted = true;
+                                koma.name = 'N' + koma.name;
                     }
-                    
+                    else{
+                        let result = confirm("成りますか？");
+                        if(result){
+                            koma.promoted = true;
+                            koma.name = 'N' + koma.name;
+                        }
+                    }
                 }
             }
         } else if (!koma.promoted && !(koma.name === 'g' || koma.name === 'k')) {
             if (row2 > 5 || row1 > 5) {
+                if(row2 === 8 && (koma.name === 'p' || koma.name === 'l' || koma.name === 'n')){
+                    koma.promoted = true;
+                    koma.name = 'N' + koma.name;
+                }
+                else{
                 let result = confirm("成りますか？");
                     if(result){
                         koma.promoted = true;
                         koma.name = 'N' + koma.name;
                     }
+                }
             }
         }
     }
