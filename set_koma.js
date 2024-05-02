@@ -237,6 +237,12 @@ window.onload = function() {
                 nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2);
             }
             updateBoard();
+            if(holdpiece1p['k']===1){
+                alert("1Pの勝ちです");
+            }
+            if(holdpiece2p['K']===1){
+                alert("2Pの勝ちです");
+            }
         });
         //セルに写真を張り付ける
         const img = document.createElement('img');
