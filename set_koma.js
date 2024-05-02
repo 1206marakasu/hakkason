@@ -3,6 +3,11 @@ import { isValidMove } from "./isValidMove.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
+    let selectflag=false;
+    let selectpiece='';
+    //手持ちの駒を管理
+    let hold1p = [];
+    let hold2p = [];
     //駒のオブジェクトを作る
     let Pn=[                         
         new komaStatus.Pawn('P'),
@@ -195,7 +200,9 @@ window.onload = function() {
             if (clickCount === 0) {
                 clickRow1 = row;
                 clickCol1 = col;
-                
+                if(selectflag){
+                    initialPosition[row][col]=selectpiece;
+                }
             } else if (clickCount === 1) {
                 clickRow2 = row;
                 clickCol2 = col;
@@ -206,35 +213,40 @@ window.onload = function() {
                 }
             }
             clickCount = (clickCount + 1) % 2;
-            //initialPositionのタイプが一致したらポップアップ表示
-            if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1].name]}`===`${pieceType[initialPosition[clickRow2][clickCol2].name]}`){
-                alert("そこには動かせません！");
-                clickCount=0;
-            //initialPositionのタイプがA,BまたはB,Aとなる場合は駒を取る
-            }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
-                if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
-                    //1pが駒を取った時trueを送る
-                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true);
-                }else{
+            if(!selectflag){
+                 //initialPositionのタイプが一致したらポップアップ表示
+                if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1].name]}`===`${pieceType[initialPosition[clickRow2][clickCol2].name]}`){
+                    alert("そこには動かせません！");
+                    clickCount=0;
+                //initialPositionのタイプがA,BまたはB,Aとなる場合は駒を取る
+                }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
+                    if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
+                        //1pが駒を取った時trueを送る
+                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true);
+                    }else{
                     //2pの場合はfalse
                     catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false);
-                }
+                    }
                 
-                initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
-                initialPosition[clickRow1][clickCol1]=sp;
-            }
-            //入力１と２でinitialPositionの要素を入れ替え
-            else if(clickCount===0){
-                console.log(`First click: row ${clickRow1}, col ${clickCol1}`);
-                console.log(`Second click: row ${clickRow2}, col ${clickCol2}`);
-                const copy=initialPosition[clickRow1][clickCol1];
-                initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
-                initialPosition[clickRow2][clickCol2]=copy;
-            } 
-            //現在の盤面の状態をinisialPotisionに合わせる
-            if(clickCount==0){
-                //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
-                nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2);
+                    initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
+                    initialPosition[clickRow1][clickCol1]=sp;
+                }
+                //入力１と２でinitialPositionの要素を入れ替え
+                else if(clickCount===0){
+                    console.log(`First click: row ${clickRow1}, col ${clickCol1}`);
+                    console.log(`Second click: row ${clickRow2}, col ${clickCol2}`);
+                    const copy=initialPosition[clickRow1][clickCol1];
+                    initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
+                    initialPosition[clickRow2][clickCol2]=copy;
+                } 
+                //現在の盤面の状態をinisialPotisionに合わせる
+                if(clickCount===0){
+                    //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
+                    nari(initialPosition[clickRow2][clickCol2],clickRow2,clickCol2);
+                }
+            }else{
+                clickCount=0;
+                selectflag=false;
             }
             updateBoard();
             if(holdpiece1p['k']===1){
@@ -275,17 +287,26 @@ window.onload = function() {
         if(flag){
             if(`${initialPosition[row2][col2].name}`[0]==='N'){
                 holdpiece1p[`${initialPosition[row2][col2].name}`[1]]++;
+                initialPosition[row2][col2].name=`${initialPosition[row2][col2].name}`[1];
+                initialPosition[row2][col2].promoted=false;
             }else{
                 holdpiece1p[`${initialPosition[row2][col2].name}`]++;
             }
-            
+            initialPosition[row2][col2].name=initialPosition[row2][col2].name.toUpperCase();
+            hold1p.push(initialPosition[row2][col2]);
         }else{
             if(`${initialPosition[row2][col2].name}`[0]==='N'){
                 holdpiece2p[`${initialPosition[row2][col2].name}`[1]]++;
+                initialPosition[row2][col2].name=`${initialPosition[row2][col2].name}`[1];
+                initialPosition[row2][col2].promoted=false;
             }else{
                 holdpiece2p[`${initialPosition[row2][col2].name}`]++;
             }
+            initialPosition[row2][col2].name=initialPosition[row2][col2].name.toLowerCase();
+            hold2p.push(initialPosition[row2][col2]);
         }
+        console.log(hold1p);
+        console.log(hold2p);
         dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
         dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     }
@@ -323,4 +344,29 @@ window.onload = function() {
             }
         }
     }
+     // すべての.kpiece要素（画像要素）を取得
+     const kpieces = document.querySelectorAll('.kpiece');
+     // 各画像要素にクリックイベントを追加する
+     kpieces.forEach(kpiece => {
+         kpiece.addEventListener('click', () => {
+             // クリックされた要素のdata-piece属性の値（駒の名前）を取得
+             const pieceName = kpiece.dataset.piece;
+             console.log('Clicked piece:', pieceName);
+             // ここで取得したpieceNameを利用して必要な処理を実行する
+             for(let i=0;i<hold1p.length;i++){
+                 if(hold1p[i].name===pieceName){
+                     selectflag=true;
+                     selectpiece=hold1p[i];
+                     hold1p=hold1p.filter((element, index) => index !== i);
+                 }
+             }
+             for(let i=0;i<hold2p.length;i++){
+                 if(hold2p[i].name===pieceName){
+                     selectflag=true;
+                     selectpiece=hold2p[i];
+                     hold2p=hold2p.filter((element, index) => index !== i);
+                 }
+             }
+         });
+     })
 };
