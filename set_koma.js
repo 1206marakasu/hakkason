@@ -1,17 +1,94 @@
+import komaStatus from "./komaStatus.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
-    let initialPosition = [
-        ['l', 'n', 's', 'g', 'k', 'g', 's', 'n', 'l'],
-        [' ', 'r', ' ', ' ', ' ', ' ', ' ', 'b', ' '],
-        ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-        [' ', 'B', ' ', ' ', ' ', ' ', ' ', 'R', ' '],
-        ['L', 'N', 'S', 'G', 'K', 'G', 'S', 'N', 'L']
+    //駒のオブジェクトを作る
+    let Pn=[                         
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P')
+    ]
+    let pn=[
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p')
     ];
+    
+    let le=[
+        new komaStatus.Lance('l'),
+        new komaStatus.Lance('l'),
+    ]
+    let Le=[
+        new komaStatus.Lance('L'),
+        new komaStatus.Lance('L'),
+    ]
+    let nt=[
+        new komaStatus.Knight('n'),
+        new komaStatus.Knight('n'),
+    ]
+    let Nt=[
+        new komaStatus.Knight('N'),
+        new komaStatus.Knight('N'),
+    ]
+    let sr=[
+        new komaStatus.Silver('s'),
+        new komaStatus.Silver('s'),
+    ]
+    let Sr=[
+        new komaStatus.Silver('S'),
+        new komaStatus.Silver('S'),
+    ]
+    let gd=[
+        new komaStatus.Gold('g'),
+        new komaStatus.Gold('g'),
+    ]
+    let Gd=[
+        new komaStatus.Gold('G'),
+        new komaStatus.Gold('G'),
+    ]
+    let kg=
+        new komaStatus.King('k');
+    
+    let Kg=
+        new komaStatus.King('K');
+  
+    let rk=
+        new komaStatus.Rook('r');
+   
+    let Rk=
+        new komaStatus.Rook('R');
+    
+    let bp=
+        new komaStatus.Bishop('b');
+    
+    let Bp=
+        new komaStatus.Bishop('B');
+    
+    let sp=
+        new komaStatus.Space(' ');
+        let initialPosition = [
+            [le[0], nt[0], sr[0], gd[0], kg, gd[1], sr[1], nt[1],le[1]],
+            [sp, rk, sp, sp, sp, sp, sp, bp, sp],
+            [pn[0], pn[1], pn[2], pn[3], pn[4], pn[5], pn[6], pn[7], pn[8]],
+            [sp, sp, sp, sp, sp, sp, sp, sp, sp],
+            [sp, sp, sp, sp, sp, sp, sp, sp, sp],
+            [sp, sp, sp, sp, sp, sp, sp, sp, sp],
+            [Pn[0], Pn[1], Pn[2], Pn[3], Pn[4], Pn[5], Pn[6], Pn[7], Pn[8]],
+            [sp, Bp, sp, sp, sp, sp, sp,Rk, sp],
+            [Le[0],Nt[0], Sr[0], Gd[0], Kg, Gd[1], Sr[1], Nt[1], Le[1]]
+        ];
     //initialPositionの要素と写真の紐づけ
     const pieceImages = {
         'K': 'king.png',
@@ -37,12 +114,12 @@ window.onload = function() {
         'NR': 'Nrook.png',
         'NB': 'Nbishop.png',
         'NP': 'Npawn.png',
-        'Ns': 'rNsilver.png',
-        'Nn': 'rNknight.png',
-        'Nl': 'rNlance.png',
-        'Nr': 'rNrook.png',
-        'Nb': 'rNbishop.png',
-        'Np': 'rNpawn.png',
+        'Ns': 'Nrsilver.png',
+        'Nn': 'Nrknight.png',
+        'Nl': 'Nrlance.png',
+        'Nr': 'Nrrook.png',
+        'Nb': 'Nrbishop.png',
+        'Np': 'Nrpawn.png',
     };
     //initialPotisionの要素を1P 2Pで振り分ける
     let pieceType = {
@@ -110,7 +187,7 @@ window.onload = function() {
 
     function isValidMove(piece, fromRow, fromCol, toRow, toCol) {
         // クリックされた駒の種類に応じて、移動先のマスが妥当かどうかを判定する
-        switch (piece) {
+        switch (piece.name) {
             case 'K': // 王
             case 'k':
                 // 王の場合、1マスだけ移動可能
@@ -147,6 +224,9 @@ window.onload = function() {
                 return (fromRow-toRow) == 1 && fromCol === toCol;
             case 'p':
                 return (fromRow-toRow)== -1 && fromCol === toCol;
+            case 'Np':
+                return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1 &&
+                !(toRow - fromRow === -1 && toCol !== fromCol);
             default:
                 return false; // その他の駒は無効な移動
         }
@@ -175,12 +255,12 @@ window.onload = function() {
             }
             clickCount = (clickCount + 1) % 2;
             //initialPositionのタイプが一致したらポップアップ表示
-            if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1]]}`===`${pieceType[initialPosition[clickRow2][clickCol2]]}`){
+            if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1].name]}`===`${pieceType[initialPosition[clickRow2][clickCol2].name]}`){
                 alert("そこには動かせません！");
                 clickCount=0;
             //initialPositionのタイプがA,BまたはB,Aとなる場合は駒を取る
-            }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2]]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2]]}`==='A')))){
-                if(`${pieceType[initialPosition[clickRow1][clickCol1]]}`==='A'){
+            }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
+                if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
                     //1pが駒を取った時trueを送る
                     catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true);
                 }else{
@@ -189,7 +269,7 @@ window.onload = function() {
                 }
                 
                 initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
-                initialPosition[clickRow1][clickCol1]=' ';
+                initialPosition[clickRow1][clickCol1]=sp;
             }
             //入力１と２でinitialPositionの要素を入れ替え
             else if(clickCount===0){
@@ -208,20 +288,13 @@ window.onload = function() {
         });
         //セルに写真を張り付ける
         const img = document.createElement('img');
-        img.src = `${pieceImages[piece]}`;
+        img.src = `${pieceImages[piece.name]}`;
         img.style.maxWidth = "100%";
         img.style.maxHeight = "100%";
         cell.appendChild(img);
 
         board.appendChild(cell);
     }
-
-    /*for (let row = 0; row < boardSize; row++) {
-        for (let col = 0; col < boardSize; col++) {
-            const piece = initialPosition[row][col];
-            //addImageToCellAtPosition(row, col, piece);
-        }
-    }*/
     function updateBoard() {
         // 盤面の全セルをクリアして再描画
         board.innerHTML = '';
@@ -242,23 +315,27 @@ window.onload = function() {
     }
     function catchkoma(row1,col1,row2,col2,flag){
         if(flag){
-            holdpiece1p[`${initialPosition[row2][col2]}`]++;
+            holdpiece1p[`${initialPosition[row2][col2].name}`]++;
         }else{
-            holdpiece2p[`${initialPosition[row2][col2]}`]++;
+            holdpiece2p[`${initialPosition[row2][col2].name}`]++;
         }
         dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
         dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     }
     //駒が駒が成るときの処理
     function nari(koma,row,col){
-        if(pieceType[koma]==='A'){
+        if(pieceType[koma.name]==='A'&&!koma.promoted){
             if(row < 3){
                 alert("成りますね？");
+                koma.promoted=true;
+                koma.name='N'+koma.name;
             }
         }
-        else{
+        else if (!koma.promoted){
             if(row > 5){
                 alert("成りますね？");
+                koma.promoted=true;
+                koma.name='N'+koma.name;
         }
     }
     }
