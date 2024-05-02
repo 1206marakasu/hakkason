@@ -234,7 +234,7 @@ window.onload = function() {
             //現在の盤面の状態をinisialPotisionに合わせる
             if(clickCount==0){
                 //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
-                nari(initialPosition[clickRow2][clickCol2],clickRow2,clickCol2);
+                nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2);
             }
             updateBoard();
         });
@@ -284,10 +284,10 @@ window.onload = function() {
         dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     }
     //駒が駒が成るときの処理
-    function nari(koma, row) {
+    function nari(koma, row1, row2) {
         if ((pieceType[koma.name] === 'A' && !koma.promoted)) {
             if(!(koma.name === 'G' || koma.name === 'K')){
-                if (row < 3) {
+                if (row2 < 3 || row1 < 3) {
                     let result = confirm("成りますか？");
                     if(result){
                         koma.promoted = true;
@@ -297,7 +297,7 @@ window.onload = function() {
                 }
             }
         } else if (!koma.promoted && !(koma.name === 'g' || koma.name === 'k')) {
-            if (row > 5) {
+            if (row2 > 5 || row1 > 5) {
                 let result = confirm("成りますか？");
                     if(result){
                         koma.promoted = true;
