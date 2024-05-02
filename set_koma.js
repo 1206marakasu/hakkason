@@ -242,7 +242,7 @@ window.onload = function() {
                 //現在の盤面の状態をinisialPotisionに合わせる
                 if(clickCount===0){
                     //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
-                    nari(initialPosition[clickRow2][clickCol2],clickRow2,clickCol2);
+                    nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2);
                 }
             }else{
                 clickCount=0;
