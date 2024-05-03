@@ -300,9 +300,19 @@ window.onload = function() {
         //王がとられたとき
         if(`${initialPosition[row2][col2].name}`==='k'){
             alert("1Pの勝ちです");
+            let nextgame = confirm("もう一度プレイしますか？");
+            if(nextgame){
+                location.reload();
+            }
+
         }else if(`${initialPosition[row2][col2].name}`==='K'){
             alert("2Pの勝ちです");
+            let result = confirm("成りますか？");
+            if(result){
+                location.reload();
+            }
         }
+
         if(flag){
             if(`${initialPosition[row2][col2].name}`[0]==='N'){
                 holdpiece1p[`${initialPosition[row2][col2].name}`[1]]++;
