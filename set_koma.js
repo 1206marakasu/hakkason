@@ -3,6 +3,7 @@ import { isValidMove } from "./isValidMove.js";
 import { catchkoma } from "./catchkoma.js";
 import { nari } from "./nari.js";
 import { komaText } from "./komakazu.js";
+import { checkNifu } from "./checkNifu.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
@@ -209,7 +210,7 @@ window.onload = function() {
     let clickRow2 = -1;
     let clickCol2 = -1;
     let clickCount = 0;
-    let placeflag=-1;
+    let placeflag=false;
     let retry = 0;
     function addImageToCellAtPosition(row, col, piece) {
         const cell = document.createElement('div');
@@ -224,22 +225,27 @@ window.onload = function() {
                 clickCol1 = col;
                 if(selectflag){
                     if(initialPosition[row][col]===sp){
-                        initialPosition[row][col]=selectpiece;
-                        placeflag=true;
-                        console.log(`${initialPosition[row][col].name}`);
-                        if(isUpperCase(`${initialPosition[row][col].name}`)){
-                            holdpiece1p[`${initialPosition[row][col].name.toLowerCase()}`]--;
+                        if(checkNifu(col,initialPosition,selectpiece)){
+                            initialPosition[row][col]=selectpiece;
+                            placeflag=true;
+                            console.log(`${initialPosition[row][col].name}`);
+                            if(isUpperCase(`${initialPosition[row][col].name}`)){
+                                holdpiece1p[`${initialPosition[row][col].name.toLowerCase()}`]--;
+                                hold1p.pop();
+                            }else{
+                                holdpiece2p[`${initialPosition[row][col].name.toUpperCase()}`]--;
+                                hold2p.pop();
+                            }
+                            komaText(holdpiece1p,holdpiece2p);
+                            dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
+                            dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
+                            //クリック音
+                            clickSound.currentTime = 0; 
+                            clickSound.play();
                         }else{
-                            holdpiece2p[`${initialPosition[row][col].name.toUpperCase()}`]--;
+                            alert("二歩です！");
                         }
-                        console.log(Player1HP);
-                        console.log(Player2HP);
-                        komaText(holdpiece1p,holdpiece2p);
-                        dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
-                        dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
-                        //クリック音
-                        clickSound.currentTime = 0; 
-                        clickSound.play();
+                       
                     }else{
                         alert("そこには置けません！");
                     }
@@ -337,7 +343,7 @@ window.onload = function() {
                     selectflag=true;
                     selectpiece=hold1p[i];
                     if(placeflag){
-                        hold1p=hold1p.filter((element, index) => index !== i);
+                        placeflag=false;
                        
                     } 
                     
@@ -348,7 +354,7 @@ window.onload = function() {
                     selectflag=true;
                     selectpiece=hold2p[i];
                     if(placeflag){
-                        hold2p=hold2p.filter((element, index) => index !== i);
+                        placeflag=false;
                        
                     }
                      
