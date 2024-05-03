@@ -194,6 +194,7 @@ window.onload = function() {
     let clickCol2 = -1;
     let clickCount = 0;
     let placeflag=-1;
+    let retry = 0;
     function addImageToCellAtPosition(row, col, piece) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
@@ -237,6 +238,7 @@ window.onload = function() {
                 if(clickCount===0&&`${pieceType[initialPosition[clickRow1][clickCol1].name]}`===`${pieceType[initialPosition[clickRow2][clickCol2].name]}`){
                     alert("そこには動かせません！");
                     clickCount=0;
+                    retry = 1;
                 //initialPositionのタイプがA,BまたはB,Aとなる場合は駒を取る
                 }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
                     if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
@@ -259,10 +261,11 @@ window.onload = function() {
                     initialPosition[clickRow2][clickCol2]=copy;
                 } 
                 //現在の盤面の状態をinisialPotisionに合わせる
-                if(clickCount===0){
+                if(clickCount===0 && retry === 0){
                     //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
                     nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2,pieceType);
                 }
+                retry = 0;
             }else{
                 clickCount=0;
                 selectflag=false;
