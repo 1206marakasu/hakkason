@@ -15,20 +15,20 @@ let rlanceText =document.getElementById("rlance");
 let rpawnText = document.getElementById("rpawn");
 
 function komaText(holdpiece1p,holdpiece2p){
-rookText.textContent =`${holdpiece1p['r']}`;
-bishopText.textContent = `${holdpiece1p['b']}`;
-goldText.textContent =`${holdpiece1p['g']}`;
-silverText.textContent = `${holdpiece1p['s']}`;
-knightText.textContent = `${holdpiece1p['n']}`;
-lanceText.textContent = `${holdpiece1p['l']}`;
-pawnText.textContent= `${holdpiece1p['p']}`;
-rrookText.textContent =`${holdpiece2p['R']}`;
-rbishopText.textContent = `${holdpiece2p['B']}`;
-rgoldText.textContent =`${holdpiece2p['G']}`;
-rsilverText.textContent = `${holdpiece2p['S']}`;
-rknightText.textContent = `${holdpiece2p['N']}`;
-rlanceText.textContent = `${holdpiece2p['L']}`;
-rpawnText.textContent= `${holdpiece2p['P']}`;
+rookText.textContent =`${holdpiece2p['R']}`;
+bishopText.textContent = `${holdpiece2p['B']}`;
+goldText.textContent =`${holdpiece2p['G']}`;
+silverText.textContent = `${holdpiece2p['S']}`;
+knightText.textContent = `${holdpiece2p['N']}`;
+lanceText.textContent = `${holdpiece2p['L']}`;
+pawnText.textContent= `${holdpiece2p['P']}`;
+rrookText.textContent =`${holdpiece1p['r']}`;
+rbishopText.textContent = `${holdpiece1p['b']}`;
+rgoldText.textContent =`${holdpiece1p['g']}`;
+rsilverText.textContent = `${holdpiece1p['s']}`;
+rknightText.textContent = `${holdpiece1p['n']}`;
+rlanceText.textContent = `${holdpiece1p['l']}`;
+rpawnText.textContent= `${holdpiece1p['p']}`;
 };
 
 export{komaText};
