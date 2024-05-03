@@ -13,6 +13,7 @@
 #Player1HP, #Player2HP{
     background-color: black;
     color: white;
+    max-width: 500px;
 }
 .cell {
     border: 1px solid black;

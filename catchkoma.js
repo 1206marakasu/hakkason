@@ -20,6 +20,8 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     if(flag){
         Player2HP-=initialPosition[row2][col2].damage;
         document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
+        document.getElementById('Player2HP').innerText = 'HP' + Player2HP + '/100';
+
         if(`${initialPosition[row2][col2].name}`[0]==='E'){
             holdpiece1p[`${initialPosition[row2][col2].name}`[1]]++;
             initialPosition[row2][col2].name=`${initialPosition[row2][col2].name}`[1];
@@ -33,6 +35,7 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     }else{
         Player1HP-=initialPosition[row2][col2].damage;
         document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
+        document.getElementById('Player1HP').innerText = 'HP' + Player1HP + '/100';
         if(`${initialPosition[row2][col2].name}`[0]==='E'){
             holdpiece2p[`${initialPosition[row2][col2].name}`[1]]++;
             initialPosition[row2][col2].name=`${initialPosition[row2][col2].name}`[1];
