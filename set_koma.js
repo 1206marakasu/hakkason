@@ -180,7 +180,9 @@ window.onload = function() {
         'p': 0,
     }
     let Player1HP = 100;
+    document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
     let Player2HP = 100;
+    document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
     window.Player1HP=Player1HP;
     window.Player2HP=Player2HP;
     let  dynamicTextElement = document.getElementById('dynamicText');
