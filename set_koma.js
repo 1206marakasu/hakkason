@@ -1,5 +1,7 @@
 import komaStatus from "./komaStatus.js";
 import { isValidMove } from "./isValidMove.js";
+import { catchkoma } from "./catchkoma.js";
+import { nari } from "./nari.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
@@ -113,18 +115,18 @@ window.onload = function() {
         'l':'/komapng/rlance.png',
         'p':'/komapng/rpawn.png',
         ' ': '/komapng/space.png',
-        'NS': '/komapng/Nsilver.png',
-        'NN': '/komapng/Nknight.png',
-        'NL': '/komapng/Nlance.png',
-        'NR': '/komapng/Nrook.png',
-        'NB': '/komapng/Nbishop.png',
-        'NP': '/komapng/Npawn.png',
-        'Ns': '/komapng/Nrsilver.png',
-        'Nn': '/komapng/Nrknight.png',
-        'Nl': '/komapng/Nrlance.png',
-        'Nr': '/komapng/Nrrook.png',
-        'Nb': '/komapng/Nrbishop.png',
-        'Np': '/komapng/Nrpawn.png',
+        'ES': '/komapng/Nsilver.png',
+        'EN': '/komapng/Nknight.png',
+        'EL': '/komapng/Nlance.png',
+        'ER': '/komapng/Nrook.png',
+        'EB': '/komapng/Nbishop.png',
+        'EP': '/komapng/Npawn.png',
+        'Es': '/komapng/Nrsilver.png',
+        'En': '/komapng/Nrknight.png',
+        'El': '/komapng/Nrlance.png',
+        'Er': '/komapng/Nrrook.png',
+        'Eb': '/komapng/Nrbishop.png',
+        'Ep': '/komapng/Nrpawn.png',
     };
     //initialPotisionの要素を1P 2Pで振り分ける
     let pieceType = {
@@ -136,12 +138,12 @@ window.onload = function() {
         'N': 'A',
         'L': 'A',
         'P': 'A',
-        'NR': 'A',
-        'NB': 'A',
-        'NP': 'A',
-        'NS': 'A',
-        'NN': 'A',
-        'NL': 'A',
+        'ER': 'A',
+        'EB': 'A',
+        'EP': 'A',
+        'ES': 'A',
+        'EN': 'A',
+        'EL': 'A',
         'k': 'B',
         'r': 'B',
         'b': 'B',
@@ -150,12 +152,12 @@ window.onload = function() {
         'n': 'B',
         'l': 'B',
         'p': 'B',
-        'Nr': 'B',
-        'Nb': 'B',
-        'Np': 'B',
-        'Ns': 'B',
-        'Nn': 'B',
-        'Nl': 'B',
+        'Er': 'B',
+        'Eb': 'B',
+        'Ep': 'B',
+        'Es': 'B',
+        'En': 'B',
+        'El': 'B',
     }
     //2Pと1Pの手持ちの駒の数
     let holdpiece2p ={
@@ -181,6 +183,8 @@ window.onload = function() {
     let Player2HP = 100;
     let  dynamicTextElement = document.getElementById('dynamicText');
     let  dynamicTextElement2 = document.getElementById('dynamicText2');
+    window.dynamicTextElement=dynamicTextElement;
+    window.dynamicTextElement2=dynamicTextElement2;
     dynamicTextElement.innerText='1P 0 0 0 0 0 0 0 0';
     dynamicTextElement2.innerText='2P 0 0 0 0 0 0 0 0';
     //クリックされたセルの行と列　回数
@@ -237,10 +241,10 @@ window.onload = function() {
                 }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
                     if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
                         //1pが駒を取った時trueを送る
-                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true);
+                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p);
                     }else{
                     //2pの場合はfalse
-                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false);
+                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p);
                     }
                 
                     initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
@@ -257,7 +261,7 @@ window.onload = function() {
                 //現在の盤面の状態をinisialPotisionに合わせる
                 if(clickCount===0){
                     //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
-                    nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2);
+                    nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2,pieceType);
                 }
             }else{
                 clickCount=0;
@@ -292,7 +296,7 @@ window.onload = function() {
             addImageToCellAtPosition(row, col, piece);
         }
     }
-    function catchkoma(row1,col1,row2,col2,flag){
+    /*function catchkoma(row1,col1,row2,col2,flag){
         //王がとられたとき
         if(`${initialPosition[row2][col2].name}`==='k'){
             alert("1Pの勝ちです");
@@ -368,7 +372,7 @@ window.onload = function() {
                 }
             }
         }
-    }
+    }*/
      // すべての.kpiece要素（画像要素）を取得
      const kpieces = document.querySelectorAll('.kpiece');
      // 各画像要素にクリックイベントを追加する

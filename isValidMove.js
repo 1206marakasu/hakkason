@@ -7,8 +7,8 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
             return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1;
         case 'R': // 飛車
         case 'r':
-        case 'Nr': //龍王
-        case 'NR':
+        case 'EB': //龍王
+        case 'ER':
             // 飛車の場合、直線上に動ける
             let aboutR = 1;
             if(fromRow > toRow){
@@ -40,7 +40,7 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
                 }
             }
             if(aboutR === 1){
-                if(piece.name === 'NR' || piece.name === 'Nr'){
+                if(piece.name === 'ER' || piece.name === 'Er'){
                     return (Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1) ||
                     (fromRow === toRow || fromCol === toCol);
                 }
@@ -51,8 +51,8 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
             }
         case 'B': // 角行
         case 'b':
-        case 'NB': //龍馬
-        case 'Nb':
+        case 'EB': //龍馬
+        case 'Eb':
             // 角行の場合、斜めに動ける
             let aboutB = 1;
             if(fromRow > toRow){
@@ -88,7 +88,7 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
                 }
             }
             if(aboutB === 1){
-                if(piece.name === 'NB' || piece.name === 'Nb'){
+                if(piece.name === 'EB' || piece.name === 'Eb'){
                     return (Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1) ||
                     Math.abs(toRow - fromRow) === Math.abs(toCol - fromCol);
                 }
@@ -98,17 +98,17 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
                 return false;
             }
         case 'G': // 金将
-        case 'NP':
-        case 'NL':
-        case 'NN':
-        case 'NS':
+        case 'EP':
+        case 'EL':
+        case 'EN':
+        case 'ES':
             return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1 &&
             !(toRow - fromRow === 1 && toCol !== fromCol);
         case 'g': // 金将
-        case 'Np':
-        case 'Nl':
-        case 'Nn':
-        case 'Ns':
+        case 'Ep':
+        case 'El':
+        case 'En':
+        case 'Es':
             return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1 &&
             !(toRow - fromRow === -1 && toCol !== fromCol);
         case 'S': // 銀将
