@@ -1,3 +1,6 @@
+html{
+    background-color: #d4e4f7;
+}
 #board {
     width: 80%;
     max-width: 400px;
@@ -6,15 +9,19 @@
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
 }
-#HP{
+#HP {
     background-color: greenyellow;
     width: 500px;
+    outline: 1px solid black;
 }
-#Player1HP, #Player2HP{
+
+#Player1HP, #Player2HP {
     background-color: black;
     color: white;
     max-width: 500px;
+    height: 30px;
 }
+
 .cell {
     border: 1px solid black;
     display: flex;
@@ -22,9 +29,6 @@
     justify-content: center;
     aspect-ratio: 1;
 }
-
-
-
 .white {
     background-color: #eeeed2;
 }

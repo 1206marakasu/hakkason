@@ -179,6 +179,7 @@ window.onload = function() {
         'l': 0,
         'p': 0,
     }
+    //プレイヤーのHP
     let Player1HP = 100;
     document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
     document.getElementById('Player1HP').innerText = 'HP' + Player1HP + '/100';
@@ -187,6 +188,8 @@ window.onload = function() {
     document.getElementById('Player2HP').innerText = 'HP' + Player2HP + '/100';
     window.Player1HP=Player1HP;
     window.Player2HP=Player2HP;
+    //クリック音
+    const clickSound = document.getElementById('click-sound');
     let  dynamicTextElement = document.getElementById('dynamicText');
     let  dynamicTextElement2 = document.getElementById('dynamicText2');
     let  dynamicTextElement3 = document.getElementById('dynamicText3');
@@ -234,6 +237,9 @@ window.onload = function() {
                         komaText(holdpiece1p,holdpiece2p);
                         dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
                         dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
+                        //クリック音
+                        clickSound.currentTime = 0; 
+                        clickSound.play();
                     }else{
                         alert("そこには置けません！");
                     }
@@ -275,11 +281,13 @@ window.onload = function() {
                     const copy=initialPosition[clickRow1][clickCol1];
                     initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
                     initialPosition[clickRow2][clickCol2]=copy;
-                } 
+                }
                 //現在の盤面の状態をinisialPotisionに合わせる
                 if(clickCount===0 && retry === 0){
                     //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
                     nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2,pieceType);
+                    clickSound.currentTime = 0; 
+                    clickSound.play();
                 }
                 retry = 0;
             }else{
