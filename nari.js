@@ -10,6 +10,7 @@ function nari(koma, row1, row2,pieceType) {
                 else{
                     let result = confirm("成りますか？");
                     if(result){
+                        koma.damage+=5;
                         koma.promoted = true;
                         koma.name = 'E' + koma.name;
                     }
@@ -25,6 +26,7 @@ function nari(koma, row1, row2,pieceType) {
             else{
             let result = confirm("成りますか？");
                 if(result){
+                    koma.damage+=5;
                     koma.promoted = true;
                     koma.name = 'E' + koma.name;
                 }

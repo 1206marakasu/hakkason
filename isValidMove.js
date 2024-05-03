@@ -7,7 +7,7 @@ function isValidMove(initialPosition,piece, fromRow, fromCol, toRow, toCol) {
             return Math.abs(toRow - fromRow) <= 1 && Math.abs(toCol - fromCol) <= 1;
         case 'R': // 飛車
         case 'r':
-        case 'EB': //龍王
+        case 'Er': //龍王
         case 'ER':
             // 飛車の場合、直線上に動ける
             let aboutR = 1;

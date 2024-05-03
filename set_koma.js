@@ -10,78 +10,78 @@ window.onload = function() {
     //手持ちの駒を管理
     let hold1p = [];
     let hold2p = [];
-    //駒のオブジェクトを作る
-    let Pn=[                         
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P'),
-        new komaStatus.Pawn('P')
+     //駒のオブジェクトを作る
+     let Pn=[                         
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1),
+        new komaStatus.Pawn('P',1)
     ]
     let pn=[
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p'),
-        new komaStatus.Pawn('p')
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1),
+        new komaStatus.Pawn('p',1)
     ];
     let le=[
-        new komaStatus.Lance('l'),
-        new komaStatus.Lance('l'),
+        new komaStatus.Lance('l',1),
+        new komaStatus.Lance('l',1),
     ]
     let Le=[
-        new komaStatus.Lance('L'),
-        new komaStatus.Lance('L'),
+        new komaStatus.Lance('L',1),
+        new komaStatus.Lance('L',1),
     ]
     let nt=[
-        new komaStatus.Knight('n'),
-        new komaStatus.Knight('n'),
+        new komaStatus.Knight('n',3),
+        new komaStatus.Knight('n',3),
     ]
     let Nt=[
-        new komaStatus.Knight('N'),
-        new komaStatus.Knight('N'),
+        new komaStatus.Knight('N',3),
+        new komaStatus.Knight('N',3),
     ]
     let sr=[
-        new komaStatus.Silver('s'),
-        new komaStatus.Silver('s'),
+        new komaStatus.Silver('s',4),
+        new komaStatus.Silver('s',4),
     ]
     let Sr=[
-        new komaStatus.Silver('S'),
-        new komaStatus.Silver('S'),
+        new komaStatus.Silver('S',4),
+        new komaStatus.Silver('S',4),
     ]
     let gd=[
-        new komaStatus.Gold('g'),
-        new komaStatus.Gold('g'),
+        new komaStatus.Gold('g',8),
+        new komaStatus.Gold('g',8),
     ]
     let Gd=[
-        new komaStatus.Gold('G'),
-        new komaStatus.Gold('G'),
+        new komaStatus.Gold('G',8),
+        new komaStatus.Gold('G',8),
     ]
     let kg=
-        new komaStatus.King('k');
+        new komaStatus.King('k',100);
     
     let Kg=
-        new komaStatus.King('K');
+        new komaStatus.King('K',100);
   
     let rk=
-        new komaStatus.Rook('r');
+        new komaStatus.Rook('r',10);
    
     let Rk=
-        new komaStatus.Rook('R');
+        new komaStatus.Rook('R',10);
     
     let bp=
-        new komaStatus.Bishop('b');
+        new komaStatus.Bishop('b',10);
     
     let Bp=
-        new komaStatus.Bishop('B');
+        new komaStatus.Bishop('B',10);
     
     let sp=
         new komaStatus.Space(' ');
@@ -181,12 +181,21 @@ window.onload = function() {
     }
     let Player1HP = 100;
     let Player2HP = 100;
+    window.Player1HP=Player1HP;
+    window.Player2HP=Player2HP;
     let  dynamicTextElement = document.getElementById('dynamicText');
     let  dynamicTextElement2 = document.getElementById('dynamicText2');
+    let  dynamicTextElement3 = document.getElementById('dynamicText3');
+    let  dynamicTextElement4 = document.getElementById('dynamicText4');
     window.dynamicTextElement=dynamicTextElement;
     window.dynamicTextElement2=dynamicTextElement2;
-    dynamicTextElement.innerText='1P 0 0 0 0 0 0 0 0';
-    dynamicTextElement2.innerText='2P 0 0 0 0 0 0 0 0';
+    window.dynamicTextElement3=dynamicTextElement3;
+    window.dynamicTextElement4=dynamicTextElement4;
+   
+    dynamicTextElement.innerText=`1P 0 0 0 0 0 0 0 0 `;
+    dynamicTextElement2.innerText=`2P 0 0 0 0 0 0 0 0`;
+    dynamicTextElement3.innerText=`HP:${Player1HP}`;
+    dynamicTextElement4.innerText=`HP:${Player2HP}`;
     //クリックされたセルの行と列　回数
     let clickRow1 = -1;
     let clickCol1 = -1;
@@ -216,7 +225,9 @@ window.onload = function() {
                         }else{
                             holdpiece2p[`${initialPosition[row][col].name.toUpperCase()}`]--;
                         }
-                        dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
+                        console.log(Player1HP);
+                        console.log(Player2HP);
+                        dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
                         dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
                     }else{
                         alert("そこには置けません！");

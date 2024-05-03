@@ -2,10 +2,11 @@
 
 // Komaクラスの定義
 class Koma {
-    constructor(name,catched=false, promoted = false) {
+    constructor(name,damage,catched=false, promoted = false) {
         this.name=name;
         this.catched=catched;
         this.promoted = promoted;
+        this.damage=damage;
     }
 
     // インスタンスの状態を表示するメソッド
@@ -38,4 +39,4 @@ const komaStatus = {
 };
 
 // エクスポート
-export default komaStatus;
+export default komaStatus;// komaStatus.js
