@@ -10,7 +10,7 @@ let rrookText =document.getElementById("rrook");
 let rbishopText =document.getElementById("rbishop");
 let rgoldText =document.getElementById("rgold");
 let rsilverText =document.getElementById("rsilver");
-let rknightText =document.getElementById("knight");
+let rknightText =document.getElementById("rknight");
 let rlanceText =document.getElementById("rlance");
 let rpawnText = document.getElementById("rpawn");
 
