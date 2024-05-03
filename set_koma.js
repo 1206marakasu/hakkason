@@ -159,7 +159,6 @@ window.onload = function() {
     }
     //2Pと1Pの手持ちの駒の数
     let holdpiece2p ={
-        'K': 0,
         'R': 0,
         'B': 0,
         'G': 0,
@@ -170,7 +169,6 @@ window.onload = function() {
     }
 
     let holdpiece1p ={
-        'k': 0,
         'r': 0,
         'b': 0,
         'g': 0,
@@ -189,6 +187,7 @@ window.onload = function() {
     let clickRow2 = -1;
     let clickCol2 = -1;
     let clickCount = 0;
+    let placeflag=-1;
     function addImageToCellAtPosition(row, col, piece) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
@@ -201,7 +200,21 @@ window.onload = function() {
                 clickRow1 = row;
                 clickCol1 = col;
                 if(selectflag){
-                    initialPosition[row][col]=selectpiece;
+                    if(initialPosition[row][col]===sp){
+                        initialPosition[row][col]=selectpiece;
+                        placeflag=true;
+                        console.log(`${initialPosition[row][col].name}`);
+                        if(isUpperCase(`${initialPosition[row][col].name}`)){
+                            holdpiece1p[`${initialPosition[row][col].name.toLowerCase()}`]--;
+                        }else{
+                            holdpiece2p[`${initialPosition[row][col].name.toUpperCase()}`]--;
+                        }
+                        dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
+                        dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
+                    }else{
+                        alert("そこには置けません！");
+                    }
+                    
                 }
             } else if (clickCount === 1) {
                 clickRow2 = row;
@@ -307,8 +320,8 @@ window.onload = function() {
         }
         console.log(hold1p);
         console.log(hold2p);
-        dynamicTextElement.innerText=`1P ${holdpiece1p['k']} ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
-        dynamicTextElement2.innerText=`2P ${holdpiece2p['K']} ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
+        dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']}`;
+        dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     }
     //駒が駒が成るときの処理
     function nari(koma, row1, row2) {
@@ -355,18 +368,29 @@ window.onload = function() {
              // ここで取得したpieceNameを利用して必要な処理を実行する
              for(let i=0;i<hold1p.length;i++){
                  if(hold1p[i].name===pieceName){
-                     selectflag=true;
-                     selectpiece=hold1p[i];
-                     hold1p=hold1p.filter((element, index) => index !== i);
+                    selectflag=true;
+                    selectpiece=hold1p[i];
+                    if(placeflag){
+                        hold1p=hold1p.filter((element, index) => index !== i);
+                       
+                    } 
+                    
                  }
              }
              for(let i=0;i<hold2p.length;i++){
                  if(hold2p[i].name===pieceName){
-                     selectflag=true;
-                     selectpiece=hold2p[i];
-                     hold2p=hold2p.filter((element, index) => index !== i);
+                    selectflag=true;
+                    selectpiece=hold2p[i];
+                    if(placeflag){
+                        hold2p=hold2p.filter((element, index) => index !== i);
+                       
+                    }
+                     
                  }
              }
          });
      })
+     function isUpperCase(str) {
+        return str === str.toUpperCase();
+    }
 };
