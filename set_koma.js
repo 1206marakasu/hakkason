@@ -2,6 +2,7 @@ import komaStatus from "./komaStatus.js";
 import { isValidMove } from "./isValidMove.js";
 import { catchkoma } from "./catchkoma.js";
 import { nari } from "./nari.js";
+import { komaText } from "./komakazu.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
@@ -227,6 +228,7 @@ window.onload = function() {
                         }
                         console.log(Player1HP);
                         console.log(Player2HP);
+                        komaText(holdpiece1p,holdpiece2p);
                         dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
                         dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
                     }else{

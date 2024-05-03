@@ -1,3 +1,5 @@
+import { komaText } from "./komakazu.js";
+
 function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p){
     //王がとられたとき
     if(`${initialPosition[row2][col2].name}`==='k'||Player2HP-initialPosition[row2][col2].damage<=0){
@@ -42,6 +44,7 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     
     console.log(Player1HP);
     console.log(Player2HP);
+    komaText(holdpiece1p,holdpiece2p);
     dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
     dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     dynamicTextElement3.innerText=`HP:${Player1HP}`;
