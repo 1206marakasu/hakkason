@@ -177,6 +177,8 @@ window.onload = function() {
         'l': 0,
         'p': 0,
     }
+    let Player1HP = 100;
+    let Player2HP = 100;
     let  dynamicTextElement = document.getElementById('dynamicText');
     let  dynamicTextElement2 = document.getElementById('dynamicText2');
     dynamicTextElement.innerText='1P 0 0 0 0 0 0 0 0';
@@ -262,12 +264,6 @@ window.onload = function() {
                 selectflag=false;
             }
             updateBoard();
-            if(holdpiece1p['k']===1){
-                alert("1Pの勝ちです");
-            }
-            if(holdpiece2p['K']===1){
-                alert("2Pの勝ちです");
-            }
         });
         //セルに写真を張り付ける
         const img = document.createElement('img');
