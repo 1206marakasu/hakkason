@@ -27,6 +27,15 @@
     background-repeat: no-repeat;
 }
 
+.komakazu{
+    line-height: 36px;
+}
+
+.rkomakazu{
+    line-height: 36px;
+    margin-bottom: 40px;
+}
+
 .kpiece {
     /* 各駒のスタイル */
     width: 40px;
@@ -37,7 +46,7 @@
 }
 
 .piece-area {
-    width: 70px; /* 適切な幅を設定してください */
+    width: 50px; /* 適切な幅を設定してください */
     height: 400px; /* 適切な高さを設定してください */
     border: 1px solid #000;
     background-color: #be7515;
@@ -45,7 +54,7 @@
 }
 
 .piece-area2 {
-    width: 70px; /* 適切な幅を設定してください */
+    width: 50px; /* 適切な幅を設定してください */
     height: 400px; /* 適切な高さを設定してください */
     border: 1px solid #000;
     background-color: #be7515;
@@ -58,4 +67,5 @@
 }
 .top {
     align-items: start;
+    display: inline-flex;
 }
