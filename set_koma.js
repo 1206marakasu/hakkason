@@ -307,7 +307,7 @@ window.onload = function() {
 
         }else if(`${initialPosition[row2][col2].name}`==='K'){
             alert("2Pの勝ちです");
-            let result = confirm("成りますか？");
+            let result = confirm("もう一度プレイしますか？");
             if(result){
                 location.reload();
             }
