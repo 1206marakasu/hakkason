@@ -1,5 +1,7 @@
 import { komaText } from "./komakazu.js";
 
+const damageSound =document.getElementById('damage-sound');
+
 function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage){
     //HPが0になったとき
     if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
@@ -19,6 +21,8 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
 
     if(flag){
         Player2HP-=komaDamage[`${initialPosition[row2][col2].name}`];
+        damageSound.currentTime = 0; 
+        damageSound.play();
         document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
         document.getElementById('Player2HP').innerText = 'HP' + Player2HP + '/100';
 
@@ -34,6 +38,8 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
         
     }else{
         Player1HP-=komaDamage[`${initialPosition[row2][col2].name}`];
+        damageSound.currentTime = 0; 
+        damageSound.play();
         document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
         document.getElementById('Player1HP').innerText = 'HP' + Player1HP + '/100';
         if(`${initialPosition[row2][col2].name}`[0]==='E'){
