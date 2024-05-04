@@ -2,16 +2,16 @@ import { komaText } from "./komakazu.js";
 
 const damageSound =document.getElementById('damage-sound');
 
-function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage){
+function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage,pieceType){
     //HPが0になったとき
-    if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
+    if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0 && pieceType[`${initialPosition[row2][col2].name}`]==='B'){
         alert("1Pの勝ちです");
         let nextgame = confirm("もう一度プレイしますか？");
         if(nextgame){
             location.reload();
         }
 
-    }else if(Player1HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
+    }else if(Player1HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0 && pieceType[`${initialPosition[row2][col2].name}`]==='A'){
         alert("2Pの勝ちです");
         let result = confirm("もう一度プレイしますか？");
         if(result){

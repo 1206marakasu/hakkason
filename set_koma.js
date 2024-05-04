@@ -301,10 +301,10 @@ window.onload = function() {
                 }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
                     if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
                         //1pが駒を取った時trueを送る
-                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage);
+                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage,pieceType);
                     }else{
                     //2pの場合はfalse
-                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage);
+                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage,pieceType);
                     }
                 
                     initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
