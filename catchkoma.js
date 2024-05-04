@@ -1,6 +1,6 @@
 import { komaText } from "./komakazu.js";
 
-function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p){
+function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage){
     //王がとられたとき
     if(`${initialPosition[row2][col2].name}`==='k'||Player2HP-initialPosition[row2][col2].damage<=0){
         alert("1Pの勝ちです");
@@ -18,7 +18,8 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     }
 
     if(flag){
-        Player2HP-=initialPosition[row2][col2].damage;
+        alert(initialPosition[row2][col2].name);
+        Player2HP-=komaDamage[`${initialPosition[row2][col2].name}`];
         document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
         document.getElementById('Player2HP').innerText = 'HP' + Player2HP + '/100';
 

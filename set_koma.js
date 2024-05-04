@@ -14,76 +14,76 @@ window.onload = function() {
     let hold2p = [];
      //駒のオブジェクトを作る
      let Pn=[                         
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1),
-        new komaStatus.Pawn('P',1)
-    ]
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P'),
+        new komaStatus.Pawn('P')
+    ];
     let pn=[
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1),
-        new komaStatus.Pawn('p',1)
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p'),
+        new komaStatus.Pawn('p')
     ];
     let le=[
-        new komaStatus.Lance('l',1),
-        new komaStatus.Lance('l',1),
+        new komaStatus.Lance('l'),
+        new komaStatus.Lance('l'),
     ]
     let Le=[
-        new komaStatus.Lance('L',1),
-        new komaStatus.Lance('L',1),
+        new komaStatus.Lance('L'),
+        new komaStatus.Lance('L'),
     ]
     let nt=[
-        new komaStatus.Knight('n',3),
-        new komaStatus.Knight('n',3),
+        new komaStatus.Knight('n'),
+        new komaStatus.Knight('n'),
     ]
     let Nt=[
-        new komaStatus.Knight('N',3),
-        new komaStatus.Knight('N',3),
+        new komaStatus.Knight('N'),
+        new komaStatus.Knight('N'),
     ]
     let sr=[
-        new komaStatus.Silver('s',4),
-        new komaStatus.Silver('s',4),
+        new komaStatus.Silver('s'),
+        new komaStatus.Silver('s'),
     ]
     let Sr=[
-        new komaStatus.Silver('S',4),
-        new komaStatus.Silver('S',4),
+        new komaStatus.Silver('S'),
+        new komaStatus.Silver('S'),
     ]
     let gd=[
-        new komaStatus.Gold('g',8),
-        new komaStatus.Gold('g',8),
+        new komaStatus.Gold('g'),
+        new komaStatus.Gold('g'),
     ]
     let Gd=[
-        new komaStatus.Gold('G',8),
-        new komaStatus.Gold('G',8),
+        new komaStatus.Gold('G'),
+        new komaStatus.Gold('G'),
     ]
     let kg=
-        new komaStatus.King('k',100);
+        new komaStatus.King('k');
     
     let Kg=
-        new komaStatus.King('K',100);
+        new komaStatus.King('K');
   
     let rk=
-        new komaStatus.Rook('r',10);
+        new komaStatus.Rook('r');
    
     let Rk=
-        new komaStatus.Rook('R',10);
+        new komaStatus.Rook('R');
     
     let bp=
-        new komaStatus.Bishop('b',10);
+        new komaStatus.Bishop('b');
     
     let Bp=
-        new komaStatus.Bishop('B',10);
+        new komaStatus.Bishop('B');
     
     let sp=
         new komaStatus.Space(' ');
@@ -98,6 +98,36 @@ window.onload = function() {
             [sp, Bp, sp, sp, sp, sp, sp,Rk, sp],
             [Le[0],Nt[0], Sr[0], Gd[0], Kg, Gd[1], Sr[1], Nt[1], Le[1]]
         ];
+    const komaDamage = {
+        'K': 100,
+        'R': 10,
+        'B': 10,
+        'G': 5,
+        'S': 5,
+        'N': 3,
+        'L': 3,
+        'P': 1,
+        'k': 100,
+        'r': 10,
+        'b': 10,
+        'g': 5,
+        's': 5,
+        'n': 3,
+        'l': 3,
+        'p': 1,
+        'ER': 15,
+        'EB': 15,
+        'ES': 5,
+        'EN': 5,
+        'EL': 5,
+        'EP': 3,
+        'Er': 15,
+        'Eb': 15,
+        'Es': 5,
+        'En': 5,
+        'El': 5,
+        'Ep': 3,
+    };
     //initialPositionの要素と写真の紐づけ
     const pieceImages = {
         'K': 'https://github.com/1206marakasu/hakkason/blob/main/komapng/king.png?raw=true',
@@ -271,10 +301,10 @@ window.onload = function() {
                 }else if(clickCount===0&&(((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='B'))||((`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='B')&&(`${pieceType[initialPosition[clickRow2][clickCol2].name]}`==='A')))){
                     if(`${pieceType[initialPosition[clickRow1][clickCol1].name]}`==='A'){
                         //1pが駒を取った時trueを送る
-                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p);
+                        catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,true,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage);
                     }else{
                     //2pの場合はfalse
-                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p);
+                    catchkoma(clickRow1,clickCol1,clickRow2,clickCol2,false,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage);
                     }
                 
                     initialPosition[clickRow2][clickCol2]=initialPosition[clickRow1][clickCol1];
