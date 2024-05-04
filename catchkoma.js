@@ -9,7 +9,7 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
             location.reload();
         }
 
-    }else if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
+    }else if(Player1HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
         alert("2Pの勝ちです");
         let result = confirm("もう一度プレイしますか？");
         if(result){

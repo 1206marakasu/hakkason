@@ -22,6 +22,9 @@ html{
     height: 30px;
 }
 
+.title{
+    display: none;
+}
 .cell {
     border: 1px solid black;
     display: flex;
