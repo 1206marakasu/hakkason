@@ -93,6 +93,10 @@ html{
 
 .explainText{
     margin-left: 50px;
+    border: #000 solid 1px;
+    background-color: #eeeed2;
+    text-align: center;
 }
-
-
+.explainText h4{
+    border-bottom: #000 solid 1px;
+}
