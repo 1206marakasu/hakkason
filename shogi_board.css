@@ -16,7 +16,8 @@ html{
 }
 #HP {
     background-color: greenyellow;
-    width: 500px;
+    max-width: 520px;
+    width: 70%;
     outline: 1px solid black;
 }
 
