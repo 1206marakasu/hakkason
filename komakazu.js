@@ -1,4 +1,4 @@
-
+//駒置き場の横の数字と駒の所持数を対応させる関数
 let rookText =document.getElementById("rook");
 let bishopText =document.getElementById("bishop");
 let goldText = document.getElementById("gold");

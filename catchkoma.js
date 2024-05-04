@@ -1,15 +1,15 @@
 import { komaText } from "./komakazu.js";
 
 function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpiece1p,holdpiece2p,komaDamage){
-    //王がとられたとき
-    if(`${initialPosition[row2][col2].name}`==='k'||Player2HP-initialPosition[row2][col2].damage<=0){
+    //HPが0になったとき
+    if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
         alert("1Pの勝ちです");
         let nextgame = confirm("もう一度プレイしますか？");
         if(nextgame){
             location.reload();
         }
 
-    }else if(`${initialPosition[row2][col2].name}`==='K'||Player1HP-initialPosition[row2][col2].damage<=0){
+    }else if(Player2HP-komaDamage[`${initialPosition[row2][col2].name}`]<=0){
         alert("2Pの勝ちです");
         let result = confirm("もう一度プレイしますか？");
         if(result){
@@ -53,6 +53,6 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     dynamicTextElement.innerText=`1P ${holdpiece1p['r']} ${holdpiece1p['b']} ${holdpiece1p['g']} ${holdpiece1p['s']} ${holdpiece1p['n']} ${holdpiece1p['l']} ${holdpiece1p['p']} `;
     dynamicTextElement2.innerText=`2P ${holdpiece2p['R']} ${holdpiece2p['B']} ${holdpiece2p['G']} ${holdpiece2p['S']} ${holdpiece2p['N']} ${holdpiece2p['L']} ${holdpiece2p['P']}`;
     dynamicTextElement3.innerText=`HP:${Player1HP}`;
-    dynamicTextElement4.innerText=`HP:${Player2HP}`
+    dynamicTextElement4.innerText=`HP:${Player2HP}`;
 }
 export{catchkoma};
