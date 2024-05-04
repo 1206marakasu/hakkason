@@ -18,7 +18,6 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
     }
 
     if(flag){
-        alert(initialPosition[row2][col2].name);
         Player2HP-=komaDamage[`${initialPosition[row2][col2].name}`];
         document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
         document.getElementById('Player2HP').innerText = 'HP' + Player2HP + '/100';
@@ -34,7 +33,7 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
         hold1p.push(initialPosition[row2][col2]);
         
     }else{
-        Player1HP-=initialPosition[row2][col2].damage;
+        Player1HP-=komaDamage[`${initialPosition[row2][col2].name}`];
         document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
         document.getElementById('Player1HP').innerText = 'HP' + Player1HP + '/100';
         if(`${initialPosition[row2][col2].name}`[0]==='E'){
