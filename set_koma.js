@@ -78,7 +78,7 @@ window.onload = function() {
    
     let Rk=
         new komaStatus.Rook('R');
-    
+        
     let bp=
         new komaStatus.Bishop('b');
     

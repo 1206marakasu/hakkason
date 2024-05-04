@@ -1,7 +1,9 @@
 html{
     background-color: #d4e4f7;
 }
-
+h1{
+    font-family: serif;
+}
 .container{
     position: absolute;
     left: 38%;
