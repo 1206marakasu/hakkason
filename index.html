@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web将棋アプリ</title>
+    <link rel="stylesheet" href="shogi_board.css">
+    <script src="set_koma.js" type="module" defer></script>
+</head>
+<body>
+    <div class="container" style="position: relative;">
+    <p id="dynamicText"></p>
+    <p id="dynamicText2"></p>
+    <p id="dynamicText3"></p>
+    <p id="dynamicText4"></p>
+    <div id = "HP">
+        <p id = "Player2HP">HP</p>
+    </div>
+    <audio id="click-sound" src="将棋の駒を打つ.mp3"></audio>
+    <div id="game">
+        <div class="top">
+            <div id="komakazu" class="komakazu">
+                <p id="rook">0</p>
+                <p id="bishop">0</p>
+                <p id="gold">0</p>
+                <p id="silver">0</p>
+                <p id="knight">0</p>
+                <p id="lance">0</p>
+                <p id="pawn">0</p>
+            </div>
+            <div id="piece-area" class="piece-area">
+                <img src="/komapng/rrook.png" class="kpiece" data-piece="r">
+                <img src="/komapng/rbishop.png" class="kpiece" data-piece="b">
+                <img src="/komapng/rgold.png" class="kpiece" data-piece="g">
+                <img src="/komapng/rsilver.png" class="kpiece" data-piece="s">
+                <img src="/komapng/rknight.png" class="kpiece" data-piece="n">
+                <img src="/komapng/rlance.png" class="kpiece" data-piece="l">
+                <img src="/komapng/rpawn.png" class="kpiece" data-piece="p">
+            </div>
+        </div>
+        <div id="board"></div>
+        <div id="piece-area2" class="piece-area2">
+            <img src="/komapng/pawn.png" class="kpiece" data-piece="P">
+            <img src="/komapng/lance.png" class="kpiece" data-piece="L">
+            <img src="/komapng/knight.png" class="kpiece" data-piece="N">
+            <img src="/komapng/silver.png" class="kpiece" data-piece="S">
+            <img src="/komapng/gold.png" class="kpiece" data-piece="G">
+            <img src="/komapng/bishop.png" class="kpiece" data-piece="B">
+            <img src="/komapng/rook.png" class="kpiece" data-piece="R">    
+        </div>
+        <div id="komakazu" class="rkomakazu">
+            <p id="rpawn">0</p>
+            <p id="rlance">0</p>
+            <p id="rknight">0</p>
+            <p id="rsilver">0</p>
+            <p id="rgold">0</p>
+            <p id="rbishop">0</p>
+            <p id="rrook">0</p>
+        </div>
+    </div>
+    <p></p>
+    <div id = "HP">
+        <p id = "Player1HP">HP</p>
+    </div>
+    <div>
+    
+</body>
+</html>
