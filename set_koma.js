@@ -242,10 +242,16 @@ window.onload = function() {
     let clickCount = 0;
     let placeflag=false;
     let retry = 0;
+    let selectrow = 10;
+    let selectcol = 10;
+    
     function addImageToCellAtPosition(row, col, piece) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         cell.classList.add('white');
+        if(row === selectrow && col === selectcol){
+            cell.classList.add('selected');
+        }
         cell.dataset.row = row;
         cell.dataset.col = col;
         //クリックされたセルの座標を受け取る
@@ -253,6 +259,8 @@ window.onload = function() {
             if (clickCount === 0) {
                 clickRow1 = row;
                 clickCol1 = col;
+                selectrow = row;
+                selectcol = col;
                 if(selectflag){
                     if(initialPosition[row][col]===sp){
                         if(checkNifu(col,initialPosition,selectpiece)){
