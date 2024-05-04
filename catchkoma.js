@@ -21,6 +21,9 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
 
     if(flag){
         Player2HP-=komaDamage[`${initialPosition[row2][col2].name}`];
+        if(Player2HP<=0){
+            Player2HP=0;
+        }
         damageSound.currentTime = 0; 
         damageSound.play();
         document.getElementById('Player2HP').style.width = 100 - Player2HP + '%';
@@ -38,6 +41,9 @@ function catchkoma(row1,col1,row2,col2,flag,initialPosition,hold1p,hold2p,holdpi
         
     }else{
         Player1HP-=komaDamage[`${initialPosition[row2][col2].name}`];
+        if(Player1HP<=0){
+            Player1HP=0;
+        }
         damageSound.currentTime = 0; 
         damageSound.play();
         document.getElementById('Player1HP').style.width = 100 - Player1HP + '%';
