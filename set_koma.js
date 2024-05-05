@@ -249,8 +249,14 @@ window.onload = function() {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         cell.classList.add('white');
-        if(row === selectrow && col === selectcol){
+        if(row === selectrow && col === selectcol&&clickCount===1){
+            console.log(row);
+            console.log(col);
+            console.log(selectrow);
+            console.log(selectcol);
+            console.log(clickCount);
             cell.classList.add('selected');
+          
         }
         cell.dataset.row = row;
         cell.dataset.col = col;
@@ -290,6 +296,7 @@ window.onload = function() {
                     
                 }
             } else if (clickCount === 1) {
+              
                 clickRow2 = row;
                 clickCol2 = col;
                 if (!isValidMove(initialPosition,initialPosition[clickRow1][clickCol1], clickRow1, clickCol1, clickRow2, clickCol2)) {
@@ -326,7 +333,7 @@ window.onload = function() {
                     initialPosition[clickRow1][clickCol1]=initialPosition[clickRow2][clickCol2];
                     initialPosition[clickRow2][clickCol2]=copy;
                 }
-                //現在の盤面の状態をinisialPotisionに合わせる
+                
                 if(clickCount===0 && retry === 0){
                     //alert(clickCol1 + " " + clickRow1 + " " + clickCol2 + " " + clickRow2 + " " + initialPosition[clickRow1][clickCol1] + " " + initialPosition[clickRow2][clickCol2]);
                     nari(initialPosition[clickRow2][clickCol2],clickRow1,clickRow2,pieceType);
@@ -338,6 +345,7 @@ window.onload = function() {
                 clickCount=0;
                 selectflag=false;
             }
+            //現在の盤面の状態をinisialPotisionに合わせる
             updateBoard();
         });
         //セルに写真を張り付ける
