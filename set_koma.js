@@ -121,13 +121,13 @@ window.onload = function() {
         'ES': 10,
         'EN': 10,
         'EL': 10,
-        'EP': 10,
+        'EP': 6,
         'Er': 30,
         'Eb': 30,
         'Es': 10,
         'En': 10,
         'El': 10,
-        'Ep': 10,
+        'Ep': 6,
     };
     //initialPositionの要素と写真の紐づけ
     const pieceImages = {
