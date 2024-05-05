@@ -4,6 +4,7 @@ import { catchkoma } from "./catchkoma.js";
 import { nari } from "./nari.js";
 import { komaText } from "./komakazu.js";
 import { checkNifu } from "./checkNifu.js";
+import { checkUtifudume } from "./checkUtifudume.js";
 window.onload = function() {
     const board = document.getElementById('board');
     const boardSize = 9;
@@ -269,7 +270,7 @@ window.onload = function() {
                 selectcol = col;
                 if(selectflag){
                     if(initialPosition[row][col]===sp){
-                        if(checkNifu(col,initialPosition,selectpiece)){
+                        if(checkNifu(col,initialPosition,selectpiece)&&checkUtifudume(row,col,initialPosition,selectpiece)){
                             initialPosition[row][col]=selectpiece;
                             placeflag=true;
                             console.log(`${initialPosition[row][col].name}`);
@@ -286,8 +287,10 @@ window.onload = function() {
                             //クリック音
                             clickSound.currentTime = 0; 
                             clickSound.play();
-                        }else{
+                        }else if(!checkNifu){
                             alert("二歩です！");
+                        }else{
+                            alert("王の前に歩を置くことはできません");
                         }
                        
                     }else{
