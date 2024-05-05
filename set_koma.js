@@ -287,7 +287,7 @@ window.onload = function() {
                             //クリック音
                             clickSound.currentTime = 0; 
                             clickSound.play();
-                        }else if(!checkNifu){
+                        }else if(!checkNifu(col,initialPosition,selectpiece)){
                             alert("二歩です！");
                         }else{
                             alert("王の前に歩を置くことはできません");
